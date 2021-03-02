@@ -17,9 +17,20 @@
                     margin: 0 auto;
                     margin-top: 2rem;
                 ">
-          <form>
-            {{form.as_table}}
+          <h1 style="margin-top: 2rem;">Loan Calculator</h1>
+          <i style="text-align: center;">Minimum 2 fields required to calculate 3rd field.</i>
+          <br>
+          <i style="text-align: center;">If 3 values are provided, the interest rate will be analysed in the results.</i>
+          <form method="post" style="margin-top: 2rem;">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary" style=
+            "margin: 0 auto; display: block; margin-top: 2rem;">Submit</button>
           </form>
+          <h1 style="margin-top: 4rem;">Results</h1>
+          Monthly Repayment Amount = {{monthlyRepayments}}
+          <br>
+          Number of Repayments = {{numPayments}}
         </div>
       </div>
     </div>
