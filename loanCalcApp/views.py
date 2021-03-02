@@ -13,7 +13,7 @@ def homepage(request):
             results = utils.handleForm(loanAmount, numPayments, monthlyRepayment)
             formDict = {
                 "form": form,
-                "loanAmount": form.cleaned_data.get("loanAmount"),
+                "loanAmount": form.cleaned_data.get("loanAmount")
             }
 
             formDict.update(results)

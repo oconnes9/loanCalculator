@@ -4,7 +4,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
 
+    </style>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
@@ -18,9 +20,9 @@
                     margin-top: 2rem;
                 ">
           <h1 style="margin-top: 2rem;">Loan Calculator</h1>
-          <i style="text-align: center;">Minimum 2 fields required to calculate 3rd field.</i>
+          <i style="text-align: center;">Provide 2 fields to calculate the 3rd.</i>
           <br>
-          <i style="text-align: center;">If 3 values are provided, the interest rate will be analysed in the results.</i>
+          <i style="text-align: center;">If 3 values are provided, the interest rate will be compared to ours in the results.</i>
           <form method="post" style="margin-top: 2rem;">
             {% csrf_token %}
             {{form.as_p}}
@@ -28,9 +30,17 @@
             "margin: 0 auto; display: block; margin-top: 2rem;">Submit</button>
           </form>
           <h1 style="margin-top: 4rem;">Results</h1>
-          Monthly Repayment Amount = {{monthlyRepayments}}
-          <br>
-          Number of Repayments = {{numPayments}}
+          {% if display ==  "monthlyRepayments" %}
+          <strong>Monthly Repayment Amount = {{monthlyRepayments}}</strong>
+          {% elif display == "numPayments" %}
+            <strong>Number of Repayments = {{numPayments}}</strong>
+          {% elif display == "threshold" %}
+            {% if aboveThreshold %}
+              <strong style="color: red;">The interest rate is above the threshold of {{interestRate}}%</strong>
+            {% else %}
+              <strong style="color: green;">The interest rate is below the threshold of {{interestRate}}%</strong>
+            {% endif %}
+          {% endif %}
         </div>
       </div>
     </div>

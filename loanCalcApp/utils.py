@@ -15,14 +15,20 @@ def aboveThreshold():
     pass
 
 def handleForm(loanAmount, numPayments=None, monthlyRepayments=None):
+    above = False
     if not monthlyRepayments:
         monthlyRepayments = calcMonthlyRepayments(loanAmount, numPayments)
+        display = "monthlyRepayments"
 
     elif not numPayments:
         numPayments = calcNumPayments(float(loanAmount), float(monthlyRepayments))
+        display = "numPayments"
 
     else:
-        pass
+        monthlyRepaymentsCompare = calcMonthlyRepayments(loanAmount, numPayments)
+        display = "threshold"
+        if monthlyRepaymentsCompare < monthlyRepayments:
+            above = True
 
-    return {"numPayments": numPayments, "monthlyRepayments": monthlyRepayments}
+    return {"numPayments": numPayments, "monthlyRepayments": monthlyRepayments, "display": display, "aboveThreshold": above, "interestRate": interestRatePercent}
 
