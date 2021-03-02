@@ -10,7 +10,7 @@ class CalcForm(forms.Form):
         numPayments = cleaned_data.get("numPayments")
         monthlyRepayment = cleaned_data.get("monthlyRepayment")
 
-        if not numPayments and not monthlyRepayment:
+        if not numPayments and not monthlyRepayment and not self.errors:  #Do not want this error to arise when a number has been entered but is not saved due to previous form field validation error.
             raise forms.ValidationError("Number of Repayments and Monthly Repayment Amount cannot both be left blank.")
 
         return cleaned_data

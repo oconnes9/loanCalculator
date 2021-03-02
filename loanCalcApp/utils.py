@@ -4,12 +4,12 @@ interestRatePercent = 3
 interestRateDec = interestRatePercent/100
 
 def calcNumPayments(loanAmount, monthlyRepayments):
-    return (log(monthlyRepayments) - log(monthlyRepayments-loanAmount*(interestRateDec/12)))/log(1+(interestRateDec/12))
+    return round((log(monthlyRepayments) - log(monthlyRepayments-loanAmount*(interestRateDec/12)))/log(1+(interestRateDec/12)))
 
 def calcMonthlyRepayments(loanAmount, numPayments):
     discountFactor = (((1 + interestRateDec/12)**numPayments - 1) / ((interestRateDec/12)*(
         (1 + interestRateDec/12) ** numPayments)))
-    return float(loanAmount)/discountFactor
+    return round(float(loanAmount)/discountFactor,2)
 
 def aboveThreshold():
     pass
