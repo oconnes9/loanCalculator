@@ -11,6 +11,7 @@ def homepage(request):
             monthlyRepayment = form.cleaned_data.get("monthlyRepayment") or None
 
             results = utils.handleForm(loanAmount, numPayments, monthlyRepayment)
+
             formDict = {
                 "form": form,
                 "loanAmount": form.cleaned_data.get("loanAmount")
@@ -22,7 +23,6 @@ def homepage(request):
                 'form': form
             }
         return render(request, 'index.html', context=formDict)
-
 
     elif request.method == "GET":
         form = CalcForm()

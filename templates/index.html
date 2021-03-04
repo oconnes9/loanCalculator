@@ -20,9 +20,9 @@
                     margin-top: 2rem;
                 ">
           <h1 style="margin-top: 2rem;">Loan Calculator</h1>
-          <i style="text-align: center;">Provide 2 fields to calculate the 3rd.</i>
-          <br>
-          <i style="text-align: center;">If 3 values are provided, the interest rate will be compared to ours in the results.</i>
+          <h3 style="font-style: italic; margin-top: 1rem;">How To Use</h3>
+          <li>Provide 2 fields to calculate the 3rd <span style="font-weight: bold;">OR</span></li>
+          <li>If 3 values are provided, the interest rate reflected by these terms will be compared to ours in the results.</li>
           <form method="post" style="margin-top: 2rem;">
             {% csrf_token %}
             {{form.as_p}}
@@ -31,7 +31,7 @@
           </form>
           <h1 style="margin-top: 4rem;">Results</h1>
           {% if display ==  "monthlyRepayments" %}
-          <strong>Monthly Repayment Amount = {{monthlyRepayments}}</strong>
+          <strong>Monthly Repayment Amount = €{{monthlyRepayments}}</strong>
           {% elif display == "numPayments" %}
             <strong>Number of Repayments = {{numPayments}}</strong>
           {% elif display == "threshold" %}

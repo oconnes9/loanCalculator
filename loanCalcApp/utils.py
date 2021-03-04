@@ -1,7 +1,7 @@
 from math import log
 
-interestRatePercent = 3
-interestRateDec = interestRatePercent/100
+interestRate = 3
+interestRateDec = interestRate/100
 
 def calcNumPayments(loanAmount, monthlyRepayments):
     return round((log(monthlyRepayments) - log(monthlyRepayments-loanAmount*(interestRateDec/12)))/log(1+(interestRateDec/12)))
@@ -30,5 +30,5 @@ def handleForm(loanAmount, numPayments=None, monthlyRepayments=None):
         if monthlyRepaymentsCompare < monthlyRepayments:
             above = True
 
-    return {"numPayments": numPayments, "monthlyRepayments": monthlyRepayments, "display": display, "aboveThreshold": above, "interestRate": interestRatePercent}
+    return {"numPayments": numPayments, "monthlyRepayments": monthlyRepayments, "display": display, "aboveThreshold": above, "interestRate": interestRate}
 
