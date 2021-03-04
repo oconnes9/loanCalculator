@@ -1,9 +1,9 @@
 from django import forms
 
 class CalcForm(forms.Form):
-    loanAmount = forms.DecimalField(label='Loan Amount (€)', decimal_places=2, widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'This field is required'}))
-    numPayments = forms.IntegerField(label='Number of Monthly Repayments', max_value=600, required=False, widget=forms.NumberInput(attrs={'class':'form-control'}))
-    monthlyRepayment = forms.DecimalField(label='Monthly Repayment Amount (€)', decimal_places=2, required=False, widget=forms.NumberInput(attrs={'class':'form-control'}))
+    loanAmount = forms.DecimalField(label='Loan Amount (€)', min_value=100, decimal_places=2, widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'This field is required'}))
+    numPayments = forms.IntegerField(label='Number of Monthly Repayments', min_value=1, max_value=600, required=False, widget=forms.NumberInput(attrs={'class':'form-control'}))
+    monthlyRepayment = forms.DecimalField(label='Monthly Repayment Amount (€)', min_value=1, decimal_places=2, required=False, widget=forms.NumberInput(attrs={'class':'form-control'}))
 
     def clean(self):
         cleaned_data = super(CalcForm, self).clean()

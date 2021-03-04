@@ -11,24 +11,23 @@ def calcMonthlyRepayments(loanAmount, numPayments):
         (1 + interestRateDec/12) ** numPayments)))
     return round(float(loanAmount)/discountFactor,2)
 
-def aboveThreshold():
-    pass
-
 def handleForm(loanAmount, numPayments=None, monthlyRepayments=None):
-    above = False
+    warning = False  #Used to change colour of text to red if above interest threshold.
     if not monthlyRepayments:
         monthlyRepayments = calcMonthlyRepayments(loanAmount, numPayments)
-        display = "monthlyRepayments"
+        display = f"Monthly Repayment Amount = €{monthlyRepayments}"
 
     elif not numPayments:
         numPayments = calcNumPayments(float(loanAmount), float(monthlyRepayments))
-        display = "numPayments"
+        display = f"Number of Repayments = {numPayments}"
 
     else:
-        monthlyRepaymentsCompare = calcMonthlyRepayments(loanAmount, numPayments)
-        display = "threshold"
-        if monthlyRepaymentsCompare < monthlyRepayments:
-            above = True
+        monthlyRepaymentsCompare = calcMonthlyRepayments(loanAmount, numPayments)  #Calculated monthly repayments with "our" interest rate
+        if monthlyRepaymentsCompare < monthlyRepayments:  #If that is less than the monthly repayments entered, the interest rate is above ours.
+            warning = True
+            display = f"The interest rate is above the threshold of {interestRate}%"
+        else:
+            display = f"The interest rate is below the threshold of {interestRate}%"
 
-    return {"numPayments": numPayments, "monthlyRepayments": monthlyRepayments, "display": display, "aboveThreshold": above, "interestRate": interestRate}
+    return {"display": display, "warning": warning}
 

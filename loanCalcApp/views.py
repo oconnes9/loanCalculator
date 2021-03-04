@@ -6,15 +6,10 @@ def homepage(request):
     if request.method == "POST":
         form = CalcForm(request.POST)
         if form.is_valid():
-            loanAmount = form.cleaned_data.get("loanAmount")
-            numPayments = form.cleaned_data.get("numPayments") or None
-            monthlyRepayment = form.cleaned_data.get("monthlyRepayment") or None
-
-            results = utils.handleForm(loanAmount, numPayments, monthlyRepayment)
+            results = utils.handleForm(form.cleaned_data.get("loanAmount"), form.cleaned_data.get("numPayments") or None, form.cleaned_data.get("monthlyRepayment") or None)
 
             formDict = {
-                "form": form,
-                "loanAmount": form.cleaned_data.get("loanAmount")
+                "form": form
             }
 
             formDict.update(results)

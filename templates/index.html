@@ -30,16 +30,10 @@
             "margin: 0 auto; display: block; margin-top: 2rem;">Submit</button>
           </form>
           <h1 style="margin-top: 4rem;">Results</h1>
-          {% if display ==  "monthlyRepayments" %}
-          <strong>Monthly Repayment Amount = €{{monthlyRepayments}}</strong>
-          {% elif display == "numPayments" %}
-            <strong>Number of Repayments = {{numPayments}}</strong>
-          {% elif display == "threshold" %}
-            {% if aboveThreshold %}
-              <strong style="color: red;">The interest rate is above the threshold of {{interestRate}}%</strong>
-            {% else %}
-              <strong style="color: green;">The interest rate is below the threshold of {{interestRate}}%</strong>
-            {% endif %}
+          {% if not warning %}
+            <strong>{{display}}</strong>
+          {% else %}
+            <strong style="color: red;">{{display}}</strong>
           {% endif %}
         </div>
       </div>
